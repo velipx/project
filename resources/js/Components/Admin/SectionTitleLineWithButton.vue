@@ -1,8 +1,7 @@
 <script setup>
-import { mdiCog, mdiChevronLeft } from '@mdi/js'
+import { mdiChevronLeft } from '@mdi/js'
 import { useSlots, computed, ref } from 'vue'
 import BaseIcon from '@/Components/Admin/BaseIcon.vue'
-import BaseButton from '@/Components/Admin/BaseButton.vue'
 import IconRounded from '@/Components/Admin/IconRounded.vue'
 import Breadcrumbs from "@/Components/Admin/Breadcrumbs.vue";
 import {navigateBack} from "@/utils/utils.js";
@@ -79,7 +78,7 @@ const handleMouseLeave = () => {
             </div>
             <BaseIcon v-else-if="icon" :path="icon" class="mr-2" size="20" />
             <h1 :class="main ? 'text-3xl' : 'text-2xl'" class="leading-tight">
-                {{ title }}
+                {{ title }}test
             </h1>
         </div>
         <slot v-if="hasSlot" />
@@ -90,10 +89,5 @@ const handleMouseLeave = () => {
 <style scoped>
 .fade-icon {
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.fade-icon-enter-from, .fade-icon-leave-to {
-    opacity: 0;
-    visibility: hidden;
 }
 </style>
