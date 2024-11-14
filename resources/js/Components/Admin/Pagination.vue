@@ -142,7 +142,6 @@ const pagesToShow = computed(() => generatePageRange(currentPage.value, totalPag
 </template>
 
 <style scoped>
-/* Dark stilovi za pop-up */
 .bg-opacity-75 {
     background-color: rgba(31, 41, 55, 0.75);
 }

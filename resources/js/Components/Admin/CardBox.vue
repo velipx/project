@@ -30,7 +30,7 @@ const componentClass = computed(() => {
   const base = [
     props.rounded,
     props.flex,
-    props.isModal ? 'dark:bg-slate-900' : 'dark:bg-slate-900/70',
+    props.isModal ? 'dark:bg-s1' : 'dark:bg-s2',
     props.hasBackground ? props.isModal : 'dark:bg-transparent bg-transparent -m-5'
   ]
 

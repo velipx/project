@@ -17,7 +17,7 @@
   }
 
   td:not(:first-child) {
-    @apply lg:border-l lg:border-t-0 lg:border-r-0 lg:border-b-0 lg:border-gray-100 lg:dark:border-slate-700;
+    @apply lg:border-0 lg:border-t-0 lg:border-r-0 lg:border-b-0 lg:border-gray-100 lg:dark:border-0;
   }
 
   th {
@@ -35,11 +35,11 @@
 
   tbody tr,
   tbody tr:nth-child(odd) {
-    @apply lg:hover:bg-gray-100 lg:dark:hover:bg-slate-700/70;
+    @apply lg:hover:bg-gray-100 lg:dark:hover:bg-s5/50;
   }
 
   tbody tr:nth-child(odd) {
-    @apply lg:bg-gray-100/50 lg:dark:bg-slate-800/50;
+    @apply lg:bg-gray-100/50 lg:dark:bg-s1/60;
   }
 
   td:before {

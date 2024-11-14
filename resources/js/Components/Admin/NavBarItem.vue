@@ -1,12 +1,14 @@
 <script setup>
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
-
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import BaseIcon from '@/Components/Admin/BaseIcon.vue'
 import UserAvatarCurrentUser from '@/Components/Admin/UserAvatarCurrentUser.vue'
 import NavBarMenuList from '@/Components/Admin/NavBarMenuList.vue'
 import BaseDivider from '@/Components/Admin/BaseDivider.vue'
 import { usePage } from '@inertiajs/vue3'
+import { useDarkModeStore } from '@/darkMode.js'
+
+const darkModeStore = useDarkModeStore()
 
 const props = defineProps({
     item: {
@@ -34,8 +36,8 @@ const is = computed(() => {
 const componentClass = computed(() => {
     const base = [
         isDropdownActive.value
-            ? `navbar-item-label-active dark:text-slate-400`
-            : `navbar-item-label dark:text-white dark:hover:text-slate-400`,
+            ? `navbar-item-label-active text-slate-400`
+            : `navbar-item-label text-white hover:text-slate-400`,
         props.item.menu ? 'lg:py-2 lg:px-3' : 'py-2 px-3'
     ]
 
@@ -54,6 +56,11 @@ const isDropdownActive = ref(false)
 
 const menuClick = (event) => {
     emit('menu-click', event, props.item)
+
+    if (props.item.isToggleLightDark) {
+        darkModeStore.set()
+        return
+    }
 
     if (props.item.menu) {
         isDropdownActive.value = !isDropdownActive.value
@@ -109,8 +116,7 @@ onBeforeUnmount(() => {
             <span
                 class="px-2 transition-colors"
                 :class="{ 'lg:hidden': item.isDesktopNoLabel && item.icon }"
-            >{{ itemLabel }}</span
-            >
+            >{{ itemLabel }}</span>
             <BaseIcon
                 v-if="item.menu"
                 :path="isDropdownActive ? mdiChevronUp : mdiChevronDown"

@@ -78,7 +78,7 @@ const handleMouseLeave = () => {
             </div>
             <BaseIcon v-else-if="icon" :path="icon" class="mr-2" size="20" />
             <h1 :class="main ? 'text-3xl' : 'text-2xl'" class="leading-tight">
-                {{ title }}test
+                {{ title }}
             </h1>
         </div>
         <slot v-if="hasSlot" />

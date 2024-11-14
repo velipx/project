@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -49,9 +48,9 @@ class RolesController extends AdminController
         // Eager load users with constraints and select only necessary columns
         $roles = Role::withTrashed()
             ->with(['users' => function ($query) {
-                $query->select('id', 'name', 'username', 'avatar_url')->take(10); // Limit number of associated users
-            }
-            ])
+                $query->select('id', 'name', 'username', 'avatar_url')
+                    ->take(5);
+            }])
             ->withCount('users as total_users_count')
             ->filter($filters)
             ->orderBy($sortKey, $sortOrder)
@@ -99,27 +98,18 @@ class RolesController extends AdminController
             'guard_name' => $role->guard_name,
             'created_at' => $role->created_at,
             'deleted_at' => $role->deleted_at,
-            'users' => $role->users->map(function ($user) {
-                return $this->mapUser($user);
-            })->toArray(),
+            'users' => $role->users->map(fn ($user) => $this->mapUser($user))->toArray(),
             'total_users_count' => $role->total_users_count,
         ];
     }
 
     private function mapUser(User $user): array
     {
-        $avatarUrl = $user->avatar_url;
-
-        if (!$avatarUrl) {
-            $avatar = new Avatar(config('laravolt.avatar'));
-            $avatarUrl = $avatar->create($user->name)->toBase64();
-        }
-
         return [
             'id' => $user->id,
             'name' => $user->name,
             'username' => $user->username,
-            'avatar_url' => $avatarUrl,
+            'avatar_url' => $user->avatar_url ?: (new Avatar(config('laravolt.avatar')))->create($user->name)->toBase64(),
         ];
     }
 

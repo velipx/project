@@ -1,7 +1,7 @@
 <script setup>
 import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js'
 import { ref, watch } from 'vue'
-import { Modal } from '../../../vendor/emargareten/inertia-modal'
+import { Modal } from 'inertia-modal'
 import menuAside from '@/routes/menuAside.js'
 import menuNavBar from '@/routes/menuNavBar.js'
 import { useDarkModeStore } from '@/darkMode.js'
@@ -67,7 +67,7 @@ router.on('navigate', () => {
     <div :class="{ 'overflow-hidden lg:overflow-visible': isAsideMobileExpanded }">
         <div
             :class="[ASIDE_PADDING_CLASS, { [ASIDE_MOBILE_CLASS]: isAsideMobileExpanded }]"
-            class="pt-14 min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
+            class="pt-14 min-h-screen w-screen transition-position lg:w-auto bg-s2 rounded-lg dark:text-slate-100"
         >
             <NavBar
                 :menu="menuNavBar"
@@ -92,11 +92,9 @@ router.on('navigate', () => {
                 @menu-click="handleMenuClick"
                 @aside-lg-close-click="isAsideLgActive = false"
             />
-            <transition name="page" mode="out-in" appear>
-                <main class="relative" :key="page.url">
-                    <slot />
-                </main>
-            </transition>
+            <main class="relative bg-gray-50 dark:bg-s1 rounded-[1.25rem] min-h-screen xl:mr-5" :key="page.url">
+                <slot />
+            </main>
 
             <FooterBar />
         </div>

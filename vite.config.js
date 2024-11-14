@@ -27,7 +27,7 @@ export default defineConfig({
         host: '0.0.0.0',      // Omogućava Vite serveru da bude dostupan spolja
         port: 5173,           // Vite port, zamenite ako koristite drugi
         hmr: {
-            host: '192.168.1.7', // IP adresa vašeg glavnog računara
+            host: '192.168.1.9', // IP adresa vašeg glavnog računara
             port: 5173
         }
     }

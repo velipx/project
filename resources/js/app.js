@@ -3,7 +3,7 @@ import './bootstrap';
 
 import { createInertiaApp, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { createApp, h } from 'vue';
+import { createApp, h, onMounted } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { createPinia } from 'pinia'
 import { modal } from '../../vendor/emargareten/inertia-modal'
@@ -14,13 +14,7 @@ import Toast, { POSITION } from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 
 // Dark mode
-// Uncomment, if you'd like to restore persisted darkMode setting, or use `prefers-color-scheme: dark`. Make sure to uncomment localStorage block in src/stores/darkMode.js
 import { useDarkModeStore } from './darkMode'
-
-const darkModeStore = useDarkModeStore(pinia)
-
-darkModeStore.set(true)
-
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -31,6 +25,13 @@ createInertiaApp({
         ),
     setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) });
+
+        const darkModeStore = useDarkModeStore(pinia)
+        // Restore persisted dark mode setting before app mount
+        const darkModeSetting = localStorage.getItem('darkMode')
+        if (darkModeSetting !== null) {
+            darkModeStore.set(darkModeSetting === '1')
+        }
 
         return app
             .use(modal, {

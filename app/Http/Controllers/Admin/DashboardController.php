@@ -10,12 +10,6 @@ class DashboardController extends Controller
 {
     public function index(): \Inertia\Response
     {
-//        $users = User::all();
-
-
-        return Inertia::render('Admin/Dashboard/Index', [
-//            'users' => $users,
-//            'permissions' => Inertia::defer(fn () => Permission::all()),
-        ]);
+        return Inertia::render('Admin/Dashboard/Index');
     }
 }
