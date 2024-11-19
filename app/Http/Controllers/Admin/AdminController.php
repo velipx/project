@@ -26,16 +26,11 @@ abstract class AdminController extends Controller
      */
     abstract protected function getModelTable(): string;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Emargareten\InertiaModal\Modal
-     */
+
     public function showCreateModal()
     {
         return Inertia::modal(static::CREATE_MODAL_VIEW, [])
-            ->baseRoute(static::BASE_ROUTE)
-            ->refreshBackdrop();
+            ->baseRoute(static::BASE_ROUTE);
     }
 
     /**
@@ -53,8 +48,7 @@ abstract class AdminController extends Controller
         return Inertia::modal(static::DELETE_MODAL_VIEW, [
             'resources' => $resources,
             'deleteRoute' => route(static::BASE_ROUTE . '.destroy'),
-        ])->baseRoute(static::BASE_ROUTE)
-            ->refreshBackdrop();
+        ])->baseRoute(static::BASE_ROUTE);
     }
 
     /**

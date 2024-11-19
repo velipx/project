@@ -12,12 +12,10 @@ import CardBox from '@/Components/Admin/CardBox.vue';
 import SectionTitleLineWithButton from "@/Components/Admin/SectionTitleLineWithButton.vue";
 import BaseDivider from "@/Components/Admin/BaseDivider.vue";
 import BaseButton from "@/Components/Admin/BaseButton.vue";
-import BaseButtons from "@/Components/Admin/BaseButtons.vue";
 import FormControl from "@/Components/Admin/FormControl.vue";
 import FormField from "@/Components/Admin/FormField.vue";
 import {useForm} from "@inertiajs/vue3";
 import BaseIcon from "@/Components/Admin/BaseIcon.vue";
-import SectionTitle from "@/Components/Admin/SectionTitle.vue";
 import {clearFormFieldError, formatDate} from "@/utils/utils.js";
 
 const props = defineProps({
@@ -66,6 +64,7 @@ const changePassword = async () => {
                         label="Current password"
                         help="Required. Your current password"
                         :error="form.errors.current_password"
+                        class="opacity-30 cursor-not-allowed"
                     >
                         <div>
                             <FormControl
@@ -73,7 +72,7 @@ const changePassword = async () => {
                                 :icon="mdiAsterisk"
                                 name="password_current"
                                 type="password"
-                                required
+                                disabled
                                 autocomplete="current-password"
                                 @input="clearFormFieldError(form, 'current_password')"
                             />

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\PasswordChanged;
-use App\Http\Controllers\Controller;
+use App\Models\Friendship;
 use App\Models\PasswordChangeLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -81,6 +81,14 @@ class UsersController extends AdminController
                 ->first();
         });
 
+        $friendship = Friendship::where(function($query) use($user) {
+            $query->where('sender_id', auth()->id())
+                ->orWhere('receiver_id', auth()->id());
+        })->where(function($query) use($user) {
+            $query->where('sender_id', $user->id)
+                ->orWhere('receiver_id', $user->id);
+        })->first();
+
         $lastPasswordChange = $user->passwordChangeLogs->isNotEmpty()
             ? $user->passwordChangeLogs->first()->changed_at
             : null;
@@ -90,6 +98,7 @@ class UsersController extends AdminController
                 'session' => $lastSession,
                 'lastPasswordChange' => $lastPasswordChange,
             ]),
+            'friendship' => $friendship,
         ]);
     }
 
@@ -101,12 +110,9 @@ class UsersController extends AdminController
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
-        try {
-            User::create($request->only(['username', 'name', 'email', 'password']));
-            return redirect()->back()->with('success', 'User created successfully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['name' => 'Failed to create user.']);
-        }
+
+        User::create($request->only(['username', 'name', 'email', 'password']));
+        return redirect()->back()->with('success', 'User created successfully.');
     }
 
     public function showSessions(User $user): \Inertia\Response
@@ -200,8 +206,7 @@ class UsersController extends AdminController
     public function showAvatarUploadModal(User $user)
     {
         return Inertia::modal('Admin/Users/AvatarUpload', ['user' => $user])
-            ->baseRoute('admin.users.show', $user)
-            ->refreshBackdrop();
+            ->baseRoute('admin.users.show', [$user]);
     }
 
     public function showChangePassword(User $user): \Inertia\Response
@@ -225,16 +230,16 @@ class UsersController extends AdminController
         ]);
     }
 
-    public function updatePassword(Request $request): \Illuminate\Http\RedirectResponse
+    public function updatePassword(Request $request, User $user): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([
-            'current_password' => ['required', 'current_password'],
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
-        $request->user()->update([
+
+        $user->update([
             'password' => Hash::make($validated['password']),
         ]);
-        event(new PasswordChanged($request->user(), $request->ip(), $request->header('User-Agent')));
+        event(new PasswordChanged($user, $request->ip(), $request->header('User-Agent')));
         return redirect()->back()->with('success', 'Password updated successfully.');
     }
 
@@ -275,5 +280,35 @@ class UsersController extends AdminController
             'created_at' => $user->created_at,
             'deleted_at' => $user->deleted_at,
         ];
+    }
+
+    public function loginAsUser(Request $request, $userId)
+    {
+        $user = User::findOrFail($userId);
+
+        // Store the current admin ID to revert back later
+        session(['admin_impersonator_id' => Auth::id()]);
+
+        // Login as the selected user
+        Auth::login($user);
+
+        return redirect()->back()->with('success', 'You are now logged in as ' . $user->name);
+    }
+
+    public function revertImpersonation(Request $request)
+    {
+        if (session()->has('admin_impersonator_id')) {
+            $adminId = session('admin_impersonator_id');
+
+            // Remove the session variable
+            session()->forget('admin_impersonator_id');
+
+            // Login back as the admin
+            Auth::loginUsingId($adminId);
+
+            return redirect()->back()->with('success', 'You are now logged back as an admin.');
+        }
+
+        return redirect()->route('home')->withErrors('No impersonation session found.');
     }
 }

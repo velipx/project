@@ -10,6 +10,7 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
         './resources/js/*.js',
+        './node_modules/@inertiaui/modal-vue/src/**/*.{js,vue}',
     ],
     darkMode: "class", // or 'media' or 'class'
     theme: {
@@ -32,6 +33,7 @@ export default {
                 s5: '#263466',
                 s6: '#3c4684',
                 s7: '#4957a1',
+                s8: '#192146',
                 black: {
                     DEFAULT: '#000000',
                     100: '#05091D',

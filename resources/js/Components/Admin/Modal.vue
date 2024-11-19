@@ -6,7 +6,6 @@ import BaseButtons from '@/Components/Admin/BaseButtons.vue';
 import CardBox from '@/Components/Admin/CardBox.vue';
 import OverlayLayer from '@/Components/Admin/OverlayLayer.vue';
 import CardBoxComponentTitle from '@/Components/Admin/CardBoxComponentTitle.vue';
-import { useModal } from 'inertia-modal';
 
 const props = defineProps({
     title: String,
@@ -35,14 +34,12 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['cancel', 'confirm']);
-const { show, close, redirect } = useModal();
 
 const handleConfirm = () => {
     emit('confirm');
 };
 
 const handleCancel = () => {
-    redirect();
     emit('cancel');
 };
 

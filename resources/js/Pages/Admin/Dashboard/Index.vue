@@ -1,6 +1,5 @@
 <script setup>
 import {computed, ref, onMounted, watch} from 'vue'
-import { Deferred } from "@inertiajs/vue3";
 import { useMainStore } from '@/main'
 import {
     mdiAccountMultiple,
@@ -121,24 +120,6 @@ watch(() => props.permissions, (newValue) => {
             <Link href="/admin/test">
                 Test
             </Link>
-
-            <Deferred data="permissions">
-                <template #fallback>
-                    <transition name="fade">
-                        <div v-if="showLoading" class="skeleton-loader">
-                            <div class="skeleton-title"></div>
-                            <div class="skeleton-line"></div>
-                            <div class="skeleton-line short"></div>
-                        </div>
-                    </transition>
-                </template>
-
-                <template #default>
-                    <div v-for="permission in permissions">
-                        {{ permission.name }}
-                    </div>
-                </template>
-            </Deferred>
         </SectionMain>
     </AdminLayout>
 </template>

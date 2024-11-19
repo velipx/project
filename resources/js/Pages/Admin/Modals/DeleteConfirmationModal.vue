@@ -1,14 +1,11 @@
 <script setup>
 import Modal from '@/Components/Admin/Modal.vue';
 import {useForm} from '@inertiajs/vue3';
-import {useModal} from 'inertia-modal';
 
 const props = defineProps({
     resources: Array,
     deleteRoute: String,
 });
-
-const {redirect} = useModal();
 
 const mapResourceIds = resources => resources.map(resource => resource.id);
 
@@ -35,7 +32,6 @@ const modalConfig = {
     confirmEvent: deleteResources,
     size: "small",
     button: "danger",
-    cancelEvent: redirect
 };
 </script>
 

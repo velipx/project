@@ -6,6 +6,7 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+
         <!-- Fonts -->
 
         <!-- Scripts -->

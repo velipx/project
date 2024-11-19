@@ -1,25 +1,31 @@
 <script setup>
 import { mdiTextBoxOutline, mdiEmail } from '@mdi/js';
-import Modal from '@/Components/Admin/Modal.vue';
-import FormField from '@/Components/Admin/FormField.vue';
-import FormControl from '@/Components/Admin/FormControl.vue';
-import { useForm } from '@inertiajs/vue3';
-import { useModal } from 'inertia-modal';
-import {clearFormFieldError} from "@/utils/utils.js";
+import {useForm, usePage} from '@inertiajs/vue3';
+import { clearFormFieldError } from "@/utils/utils.js";
+import BaseButtons from "@/Components/Admin/BaseButtons.vue";
+import BaseButton from "@/Components/Admin/BaseButton.vue";
+import FormFieldGenerator from '@/Components/Admin/FormFieldGenerator.vue';
+import { ref } from "vue";
 
-const modalTitle = "Create New User";
-const createRoute = route('admin.users.store');
-const { redirect } = useModal();
-const form = useForm({ username: null, name: null, email: null, password: null, password_confirmation: null });
+const MODAL_TITLE = "Create New User";
+const CREATE_ROUTE = route('admin.users.store');
+
+const form = useForm({
+    username: null,
+    name: null,
+    email: null,
+    password: null,
+    password_confirmation: null,
+    _token: usePage().props.csrf_token,
+});
+
+const userModalRef = ref(null);
 
 const handleFormSubmit = () => {
-    form.post(createRoute, {
+    form.post(CREATE_ROUTE, {
         onSuccess: () => {
             form.reset();
-            redirect();
-        },
-        onError: ({ errors }) => {
-            console.error("Error creating user:", errors);
+            userModalRef.value.close();
         }
     });
 };
@@ -27,69 +33,80 @@ const handleFormSubmit = () => {
 
 <template>
     <Modal
-        :title="modalTitle"
-        button-label="Create"
-        has-cancel
-        @confirm="handleFormSubmit"
-        @cancel="redirect"
-        :isProcessing="form.processing"
+        ref="userModalRef"
+        #default="{ close }"
+        slideover
     >
-        <form @submit.prevent="handleFormSubmit" class="space-y-6">
-            <FormField label="Name" :error="form.errors.name">
-                <div>
-                    <FormControl
-                        v-model="form.name"
-                        :icon="mdiTextBoxOutline"
-                        placeholder="Enter user name"
-                        required
-                        @input="clearFormFieldError(form, 'name')"
-                    />
-                </div>
-            </FormField>
-            <FormField label="Username" :error="form.errors.username">
-                <div>
-                    <FormControl
-                        v-model="form.username"
-                        :icon="mdiTextBoxOutline"
-                        placeholder="Enter user username"
-                        required
-                        @input="clearFormFieldError(form, 'username')"
-                    />
-                </div>
-            </FormField>
-            <FormField label="Email" :error="form.errors.email">
-                <div>
-                    <FormControl
-                        v-model="form.email"
-                        :icon="mdiEmail"
-                        placeholder="Enter user email"
-                        type="email"
-                        required
-                        @input="clearFormFieldError(form, 'email')"
-                    />
-                </div>
-            </FormField>
-            <FormField label="Password" :error="form.errors.password">
-                <div>
-                    <FormControl
-                        v-model="form.password"
-                        type="password"
-                        placeholder="Enter password"
-                        required
-                        @input="clearFormFieldError(form, 'password')"
-                    />
-                </div>
-            </FormField>
-            <FormField label="Confirm Password" >
-                <div>
-                    <FormControl
-                        v-model="form.password_confirmation"
-                        type="password"
-                        placeholder="Confirm password"
-                        required
-                    />
-                </div>
-            </FormField>
+        <div class="flex items-center justify-between mb-3">
+            <h1 class="text-2xl dark:text-white">
+                {{ MODAL_TITLE }}
+            </h1>
+        </div>
+        <form @submit.prevent="handleFormSubmit" class="flex-1 overflow-y-auto p-4 space-y-3">
+            <FormFieldGenerator
+                label="Name"
+                modelValue="name"
+                :icon="mdiTextBoxOutline"
+                type="text"
+                placeholder="Enter user name"
+                errorKey="name"
+                :form="form"
+                :clearFormFieldError="clearFormFieldError"
+            />
+            <FormFieldGenerator
+                label="Username"
+                modelValue="username"
+                :icon="mdiTextBoxOutline"
+                type="text"
+                placeholder="Enter user username"
+                errorKey="username"
+                :form="form"
+                :clearFormFieldError="clearFormFieldError"
+            />
+            <FormFieldGenerator
+                label="Email"
+                modelValue="email"
+                :icon="mdiEmail"
+                type="email"
+                placeholder="Enter user email"
+                errorKey="email"
+                :form="form"
+                :clearFormFieldError="clearFormFieldError"
+            />
+            <FormFieldGenerator
+                label="Password"
+                modelValue="password"
+                :icon="null"
+                type="password"
+                placeholder="Enter password"
+                errorKey="password"
+                :form="form"
+                :clearFormFieldError="clearFormFieldError"
+            />
+            <FormFieldGenerator
+                label="Confirm Password"
+                modelValue="password_confirmation"
+                :icon="null"
+                type="password"
+                placeholder="Confirm password"
+                errorKey="password_confirmation"
+                :form="form"
+                :clearFormFieldError="clearFormFieldError"
+            />
+            <BaseButtons>
+                <BaseButton
+                    label="Create"
+                    color="info"
+                    :processing="form.processing"
+                    type="submit"
+                />
+                <BaseButton
+                    label="Cancel"
+                    color="info"
+                    outline
+                    @click="close"
+                />
+            </BaseButtons>
         </form>
     </Modal>
 </template>

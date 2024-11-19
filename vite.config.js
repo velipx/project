@@ -1,14 +1,24 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
-import path from 'path';
+import os from 'os';
+
+function getLocalIPAddress() {
+    const interfaces = os.networkInterfaces();
+    for (const iface of Object.values(interfaces)) {
+        for (const config of iface) {
+            if (config.family === 'IPv4' && !config.internal) {
+                return config.address;
+            }
+        }
+    }
+    return '127.0.0.1';
+}
+
+const localIPAddress = getLocalIPAddress();
+console.log('Local IP Address:', localIPAddress);
 
 export default defineConfig({
-    resolve: {
-        alias: {
-            'inertia-modal': path.resolve('vendor/emargareten/inertia-modal'),
-        },
-    },
     plugins: [
         laravel({
             input: 'resources/js/app.js',
@@ -24,12 +34,11 @@ export default defineConfig({
         }),
     ],
     server: {
-        host: '0.0.0.0',      // Omogućava Vite serveru da bude dostupan spolja
-        port: 5173,           // Vite port, zamenite ako koristite drugi
+        host: '0.0.0.0',
+        port: 5173,
         hmr: {
-            host: '192.168.1.9', // IP adresa vašeg glavnog računara
+            host: getLocalIPAddress(),
             port: 5173
         }
-    }
-
+    },
 });

@@ -1,7 +1,6 @@
 <script setup>
 import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js'
-import { ref, watch } from 'vue'
-import { Modal } from 'inertia-modal'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import menuAside from '@/routes/menuAside.js'
 import menuNavBar from '@/routes/menuNavBar.js'
 import { useDarkModeStore } from '@/darkMode.js'
@@ -62,6 +61,23 @@ router.on('navigate', () => {
     isAsideMobileExpanded.value = false
     isAsideLgActive.value = false
 })
+
+const userId = usePage().props.auth.user.id;
+
+let notificationChannel;
+
+onMounted(() => {
+    notificationChannel = Echo.private(`notifications.${userId}`)
+        .notification((notification) => {
+            toast.success(notification.message, {timeout: TOAST_DURATION});
+        });
+});
+
+onUnmounted(() => {
+    if (notificationChannel) {
+        Echo.leave(`notifications.${userId}`);
+    }
+});
 </script>
 <template>
     <div :class="{ 'overflow-hidden lg:overflow-visible': isAsideMobileExpanded }">
@@ -93,12 +109,11 @@ router.on('navigate', () => {
                 @aside-lg-close-click="isAsideLgActive = false"
             />
             <main class="relative bg-gray-50 dark:bg-s1 rounded-[1.25rem] min-h-screen xl:mr-5" :key="page.url">
-                <slot />
+                <slot/>
             </main>
 
-            <FooterBar />
+            <FooterBar/>
         </div>
-        <Modal />
     </div>
 </template>
 

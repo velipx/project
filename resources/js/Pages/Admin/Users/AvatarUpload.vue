@@ -1,7 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue';
-import Modal from '@/Components/Admin/Modal.vue';
-import { useModal } from 'inertia-modal';
 import { useForm } from '@inertiajs/vue3';
 import vueFilePond, { setOptions } from 'vue-filepond';
 import 'filepond/dist/filepond.min.css';
@@ -15,7 +13,6 @@ import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 import BaseButton from "@/Components/Admin/BaseButton.vue";
 
 const modalTitle = "Change Avatar";
-const { redirect } = useModal();
 const props = defineProps(['user']);
 const emit = defineEmits(['uploadSuccess']);
 
@@ -50,7 +47,6 @@ const handleAvatarUpload = (fieldName, file, metadata, load, error, progress, ab
     onSuccess: (page) => {
       load(page.props.avatar_url);
       emit('uploadSuccess', page.props.avatar_url);
-      redirect();
     },
     onError: () => {
       error('Failed to upload avatar');
@@ -99,21 +95,22 @@ const startUpload = () => {
 </script>
 
 <template>
-  <Modal
-    :title="modalTitle"
-    button-label="Upload"
-    has-cancel
-    size="xs"
-    @cancel="redirect"
-    @confirm="startUpload"
-  >
-    <FilePond
-      class="w-40 h-40 bg-transparent"
-      ref="pondRef"
-      v-bind="filePondOptions"
-      :allowReplace="true"
-    />
-  </Modal>
+    <Modal
+        ref="userModalRef"
+        #default="{ close }"
+        maxWidth="sm"
+    >
+        <div class="flex flex-col justify-center">
+            <FilePond
+                class="w-40 h-40 bg-transparent mx-auto mb-10"
+                ref="pondRef"
+                v-bind="filePondOptions"
+                :allowReplace="true"
+            />
+            <BaseButton label="Upload" color="info" :processing="false" @click="startUpload" />
+        </div>
+
+    </Modal>
 </template>
 
 <style>

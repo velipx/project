@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
 import BaseButton from "@/Components/Admin/BaseButton.vue";
 import CardBox from "@/Components/Admin/CardBox.vue";
 

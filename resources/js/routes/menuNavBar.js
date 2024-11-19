@@ -1,54 +1,42 @@
 import {
-  mdiMenu,
-  mdiClockOutline,
-  mdiCloud,
-  mdiCrop,
-  mdiAccount,
-  mdiCogOutline,
-  mdiEmail,
-  mdiLogout,
-  mdiThemeLightDark,
-  mdiGithub,
-  mdiReact
+    mdiAccount,
+    mdiCogOutline,
+    mdiEmail,
+    mdiLogout,
+    mdiBell
 } from '@mdi/js'
 
 export default [
-  {
-    isCurrentUser: true,
-    menu: [
-      {
-        icon: mdiAccount,
-        label: 'My Profile',
-        href: '/profile'
-      },
-      {
-        icon: mdiCogOutline,
-        label: 'Settings'
-      },
-      {
-        icon: mdiEmail,
-        label: 'Messages'
-      },
-      {
-        isDivider: true
-      },
-      {
-        icon: mdiLogout,
-        label: 'Log Out',
-        isLogout: true
-      }
-    ]
-  },
     {
-        icon: mdiThemeLightDark,
-        label: 'Light/Dark',
-        isDesktopNoLabel: true,
-        isToggleLightDark: true
+        isCurrentUser: true,
+        menu: [
+            {
+                icon: mdiAccount,
+                label: 'My Profile',
+                href: '/profile'
+            },
+            {
+                icon: mdiCogOutline,
+                label: 'Settings'
+            },
+            {
+                icon: mdiEmail,
+                label: 'Messages'
+            },
+            {
+                isDivider: true
+            },
+            {
+                icon: mdiLogout,
+                label: 'Log Out',
+                isLogout: true
+            }
+        ]
     },
-  {
-    icon: mdiLogout,
-    label: 'Log out',
-    isDesktopNoLabel: true,
-    isLogout: true
-  }
+    {
+        icon: mdiBell,
+        isNotificationBell: true,
+        href: '#',
+        menu: null // or any sub menu if needed
+    }
 ]

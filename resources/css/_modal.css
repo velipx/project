@@ -1,0 +1,11 @@
+.im-dialog {
+    @apply z-40
+}
+
+.im-backdrop {
+    @apply  inset-0 bg-gradient-to-tr opacity-90 dark:from-gray-700 dark:via-s2 dark:to-s1
+}
+
+.im-modal-content, .im-slideover-content {
+    @apply dark:bg-s2
+}

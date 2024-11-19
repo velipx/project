@@ -52,6 +52,7 @@ const props = defineProps({
         validator: value => ['small', 'medium', 'large'].includes(value)
     },
     required: Boolean,
+    disabled: Boolean,
     borderless: Boolean,
     transparent: Boolean,
     ctrlKFocus: Boolean
@@ -167,6 +168,7 @@ function clearSearch() {
             :required="required"
             :placeholder="placeholder"
             :type="computedType"
+            :disabled="disabled"
             :class="inputElClass"
         />
         <!-- Icon display -->

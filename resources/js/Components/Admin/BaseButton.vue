@@ -4,6 +4,7 @@ import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/Components/Admin/BaseIcon.vue'
 import { Link } from '@inertiajs/vue3'
 import { mdiLoading } from '@mdi/js';
+import { ModalLink } from '@inertiaui/modal-vue';
 
 const props = defineProps({
   label: {
@@ -42,6 +43,10 @@ const props = defineProps({
     type: String,
     default: null
   },
+  modal: {
+    type: Boolean,
+    default: false
+  },
   color: {
     type: String,
     default: 'white'
@@ -58,6 +63,10 @@ const props = defineProps({
 })
 
 const is = computed(() => {
+  if (props.modal) {
+    return ModalLink;
+  }
+
   if (props.as) {
     return props.as
   }
@@ -123,6 +132,7 @@ const componentClass = computed(() => {
     :type="computedType"
     :target="target"
     :disabled="disabled || processing"
+    v-bind="is === ModalLink ? { navigate: true } : {}"
   >
     <BaseIcon v-if="processing" :path="mdiLoading" size="1.2rem" class="animate-spin mr-0" />
     <BaseIcon v-if="icon" :path="icon" :size="iconSize" :class="props.labelColor" />
