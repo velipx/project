@@ -13,18 +13,16 @@ class DashboardController extends Controller
 {
     public function index(): \Inertia\Response
     {
-        $user = Auth()->user();
+/*        $user = Auth()->user();
+        $wallets = \App\Models\Wallet::with('currencyRelation')
+            ->where('holder_type', get_class($user))
+            ->where('holder_id', $user->id)
+            ->get();
 
-
-        Log::info('Handling FriendshipRequested event', [
-            'test' => 'test'
-        ]);
-
-        $message = "Ovo je test notifikacija!";
-        $url = route('admin.dashboard');
-        $userId = $user->id;
-
-        $user->notify(new UserNotification('teeeeee notifikacija 24!', $userId));
+        foreach($wallets as $wallet)
+        {
+            echo $wallet->name . ' ' . $wallet->currencyRelation->name . ' ' . $wallet->convertBalanceToUSD() . '<br>';
+        }*/
 
         return Inertia::render('Admin/Dashboard/Index');
     }

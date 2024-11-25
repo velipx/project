@@ -10,6 +10,7 @@ import NavBar from '@/Components/Admin/NavBar.vue'
 import NavBarItemPlain from '@/Components/Admin/NavBarItemPlain.vue'
 import AsideMenu from '@/Components/Admin/AsideMenu.vue'
 import FooterBar from '@/Components/Admin/FooterBar.vue'
+import WalletBalance from '@/Components/Admin/WalletBalance.vue'
 import { router, usePage } from '@inertiajs/vue3'
 import { TYPE, useToast } from "vue-toastification"
 
@@ -98,7 +99,7 @@ onUnmounted(() => {
                     <BaseIcon :path="mdiMenu" size="24"/>
                 </NavBarItemPlain>
                 <NavBarItemPlain use-margin>
-                    <FormControl placeholder="Search (ctrl+k)" ctrl-k-focus transparent borderless/>
+                    <WalletBalance />
                 </NavBarItemPlain>
             </NavBar>
             <AsideMenu

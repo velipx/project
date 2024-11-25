@@ -53,7 +53,8 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
       success: 'bg-emerald-700 dark:bg-emerald-600',
       danger: 'bg-red-700 dark:bg-red-600',
       warning: 'bg-yellow-700 dark:bg-yellow-600',
-      info: 'bg-blue-700 dark:bg-blue-600'
+      info: 'bg-blue-700 dark:bg-blue-600',
+      project: 'bg-blue-700 dark:bg-s4'
     },
     bg: {
       white: 'bg-white text-black',
@@ -63,7 +64,8 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
       success: 'bg-emerald-600 dark:bg-emerald-500 text-white',
       danger: 'bg-red-600 dark:bg-red-500 text-white',
       warning: 'bg-yellow-600 dark:bg-yellow-500 text-white',
-      info: 'bg-blue-600 dark:bg-[#3c52da] text-white outline-none ring-0'
+      info: 'bg-blue-600 dark:bg-[#3c52da] text-white outline-none ring-0',
+      project: 'bg-blue-600 dark:bg-s4 text-white outline-none ring-0'
     },
     bgHover: {
       white: 'hover:bg-gray-100',
@@ -86,7 +88,8 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
       success: 'border-emerald-600 dark:border-emerald-500',
       danger: 'border-red-600 dark:border-red-500',
       warning: 'border-yellow-600 dark:border-yellow-500',
-      info: 'border-blue-600 dark:border-[#3c52da]'
+      info: 'border-blue-600 dark:border-[#3c52da]',
+      project: 'border-blue-600 dark:border-s4'
     },
     text: {
       contrast: 'dark:text-slate-100',

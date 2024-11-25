@@ -29,10 +29,31 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $user = $request->user();
+
+        // Fetch wallets with associated currencies for the authenticated user
+        $wallets = [];
+        if ($user) {
+            $wallets = $user->wallets->map(function ($wallet) {
+                return [
+                    'id' => $wallet->id,
+                    'name' => $wallet->name,
+                    'balance' => $wallet->getBalanceForCurrency(),
+                    'balanceUSD' => $wallet->convertBalanceToUSD(),
+                    'currency' => $wallet->currencyRelation->only(['name', 'symbol', 'code', 'meta']),
+                ];
+            });
+        }
+
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $user ? [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'wallets' => $wallets,
+                ] : null,
             ],
             'flash' => function () use ($request) {
                 return [

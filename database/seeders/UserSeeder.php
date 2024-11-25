@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
         $userRole = Role::firstOrCreate(['name' => 'user']);
 
         // Generišemo 100 nasumičnih korisnika i dodeljujemo im ulogu "user"
-        User::factory(100000)->create()->each(function ($user) use ($userRole) {
+        User::factory(5)->create()->each(function ($user) use ($userRole) {
             $user->assignRole($userRole);
         });
     }

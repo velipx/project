@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Bavix\Wallet\Traits\HasWalletFloat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -9,16 +10,13 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Filterable;
 use Laravel\Sanctum\HasApiTokens;
+use Bavix\Wallet\Traits\HasWallets;
+use Bavix\Wallet\Interfaces\Wallet;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Wallet
 {
-    use HasApiTokens, HasRoles, HasFactory, Notifiable, SoftDeletes, Filterable;
+    use HasApiTokens, HasRoles, HasFactory, Notifiable, SoftDeletes, Filterable, HasWallets, HasWalletFloat;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'username',
         'name',
@@ -30,21 +28,11 @@ class User extends Authenticatable
         'google2fa_enabled',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -54,13 +42,25 @@ class User extends Authenticatable
         ];
     }
 
-    public function sessions()
+    public function sessions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\Illuminate\Database\Eloquent\Model::class, 'user_id', 'id');
     }
 
-    public function passwordChangeLogs()
+    public function passwordChangeLogs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(PasswordChangeLog::class, 'user_id', 'id');
+    }
+
+    // Method to get the default address of a given wallet slug
+    public function getDefaultAddress($slug)
+    {
+        $wallet = $this->getWallet($slug); // Getting the wallet using laravel-wallet method
+
+        if ($wallet) {
+            return $wallet->defaultAddress()->first();
+        }
+
+        return null; // Or handle as needed
     }
 }

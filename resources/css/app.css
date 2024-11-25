@@ -1,12 +1,15 @@
-@import 'tailwind/_base.css';
-@import 'tailwind/_components.css';
-@import 'tailwind/_utilities.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @import '_checkbox-radio-switch.css';
 @import '_progress.css';
 @import '_scrollbars.css';
 @import '_table.css';
 @import '_modal.css';
+@import '_utilities.css';
 
 @import 'styles/_basic.css';
 @import 'styles/_white.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

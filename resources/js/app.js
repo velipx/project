@@ -5,7 +5,8 @@ import { createInertiaApp, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h, onMounted } from 'vue';
 import { renderApp } from '@inertiaui/modal-vue';
-import { Modal, ModalLink } from '@inertiaui/modal-vue';
+import { ModalLink } from '@inertiaui/modal-vue';
+import Modal from '@/Components/Admin/Modal/Modal.vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { createPinia } from 'pinia'
 import Toast, { POSITION } from 'vue-toastification';

@@ -4,7 +4,7 @@ import { useMainStore } from '@/main'
 import {
     mdiAccountMultiple,
     mdiCartOutline,
-    mdiChartTimelineVariant,
+    mdiChartTimelineVariant, mdiCurrencyBtc,
     mdiGithub,
 } from '@mdi/js'
 import * as chartConfig from '@/Components/Admin/Charts/chart.config.js'
@@ -16,6 +16,7 @@ import CardBoxClient from '@/Components/Admin/CardBoxClient.vue'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import SectionTitleLineWithButton from '@/Components/Admin/SectionTitleLineWithButton.vue'
 import { Link } from '@inertiajs/vue3'
+import GlowButton from "@/Components/Admin/GlowButton.vue";
 
 const chartData = ref(null)
 
@@ -116,6 +117,9 @@ watch(() => props.permissions, (newValue) => {
                     />
                 </div>
             </div>
+
+            <GlowButton size="sm" class="mr-1 rounded-xl" :icon="mdiCurrencyBtc" label="Deposit" />
+
 
             <Link href="/admin/test">
                 Test

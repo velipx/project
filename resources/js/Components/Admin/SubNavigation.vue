@@ -1,6 +1,8 @@
 <script setup>
 import BaseButton from "@/Components/Admin/BaseButton.vue";
 import CardBox from "@/Components/Admin/CardBox.vue";
+import {mdiCurrencyBtc} from "@mdi/js";
+import GlowButton from "@/Components/Admin/GlowButton.vue";
 
 const props = defineProps({
     routes: {
@@ -43,13 +45,13 @@ const getButtonClass = (nav) => {
                     :class="getButtonClass(nav)"
                 />
             </div>
-            <BaseButton
+            <GlowButton
                 v-if="buttonLabel"
-                :label="buttonLabel"
+                size="sm"
+                class="mr-1 rounded-xl"
                 :icon="buttonIcon"
-                class="flex justify-end mt-2 sm:mt-0"
+                :label="buttonLabel"
                 @click="onButtonClick"
-                color="whiteDark"
             />
         </div>
     </CardBox>
