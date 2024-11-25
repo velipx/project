@@ -141,7 +141,7 @@ const filteredData = computed(() => showDeleted.value ? data.value : data.value.
                     label="Delete all"
                     :icon="mdiDelete"
                     color="danger"
-                    class="bg-red-500 text-white rounded ml-2 px-2"
+                    class="bg-red-500 text-white rounded-xs ml-2 px-2"
                 />
             </div>
             <div class="flex items-center justify-end">
@@ -154,7 +154,7 @@ const filteredData = computed(() => showDeleted.value ? data.value : data.value.
                     :icon="mdiMagnify"
                 />
                 <Menu as="div" class="relative">
-                    <MenuButton class="bg-blue-500 text-white rounded p-2 -ml-2">
+                    <MenuButton class="bg-blue-500 text-white rounded-xs p-2 -ml-2">
                         <svg v-bind="$attrs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6">
                             <path fill-rule="evenodd"
@@ -171,7 +171,7 @@ const filteredData = computed(() => showDeleted.value ? data.value : data.value.
                         leave-to-class="transform scale-95 opacity-0"
                     >
                         <MenuItems
-                            class="absolute right-0 z-10 mt-2 w-96 origin-top-right divide-y divide-gray-700 rounded-md bg-gray-900 shadow-lg ring-1 ring-black/5 focus:outline-none">
+                            class="absolute right-0 z-10 mt-2 w-96 origin-top-right divide-y divide-gray-700 rounded-md bg-gray-900 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
                             <div class="px-4 py-3 space-y-2">
                                 <h3 class="font-semibold text-lg mb-2 text-white">Filter Options</h3>
                                 <div class="grid grid-cols-2 gap-x-4 gap-y-2">

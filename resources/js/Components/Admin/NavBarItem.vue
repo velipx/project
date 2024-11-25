@@ -46,7 +46,7 @@ const userProfileMenu = menuNavBar.find(item => item.isCurrentUser).menu;
         <Menu v-if="isCurrentUser" as="div" class="relative inline-block text-left">
             <div>
                 <MenuButton
-                    class="inline-flex justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+                    class="inline-flex justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75"
                 >
                     <UserAvatarCurrentUser class="w-6 h-6 mr-3 inline-flex" />
                     <span class="ml-2">{{ userName }}</span>
@@ -62,7 +62,7 @@ const userProfileMenu = menuNavBar.find(item => item.isCurrentUser).menu;
                 leave-to-class="transform scale-95 opacity-0"
             >
                 <MenuItems
-                    class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                    class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden"
                 >
                     <div class="px-1 py-1">
                         <MenuItem v-for="option in userProfileMenu" :key="option.label" v-slot="{ active }">
@@ -88,7 +88,7 @@ const userProfileMenu = menuNavBar.find(item => item.isCurrentUser).menu;
             <Popover v-slot="{ open }" class="relative">
                 <PopoverButton
                     :class="open ? 'text-white' : 'text-white/90'"
-                    class="group inline-flex items-center rounded-md px-3 py-2 text-base font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+                    class="group inline-flex items-center rounded-md px-3 py-2 text-base font-medium text-white focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75"
                 >
                     <BaseIcon :path="mdiBell" />
                     <ChevronDownIcon

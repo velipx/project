@@ -30,7 +30,7 @@ const { user } = usePage().props.auth;
                 <!-- Menu for User Profile -->
                 <Menu as="div" class="relative inline-block text-left">
                     <MenuButton
-                        class="flex justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+                        class="flex justify-center rounded-full focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75">
                         <UserProfile :user="user"/>
                         <BaseIcon :path="menu[0].expanded ? mdiChevronUp : mdiChevronDown" size="20"
                                   class="ml-2 text-violet-400"/>
@@ -43,7 +43,7 @@ const { user } = usePage().props.auth;
                         leave-from-class="transform scale-100 opacity-100"
                         leave-to-class="transform scale-95 opacity-0">
                         <MenuItems
-                            class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 dark:divide-gray-600 rounded-md bg-white dark:bg-s1 shadow-lg ring-1 ring-black/5 focus:outline-none">
+                            class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 dark:divide-gray-600 rounded-md bg-white dark:bg-s1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
                             <div v-for="item in menu[0].menu" :key="item.label" class="px-1 py-1">
                                 <MenuItem v-slot="{ active }">
                                     <a

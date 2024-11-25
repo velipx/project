@@ -128,7 +128,7 @@ const loginAsUser = () => {
                     </div>
                 </CardBox>
 
-                <CardBox class="lg:col-span-1 bg-gradient-to-r text-white p-6 text-center">
+                <CardBox class="lg:col-span-1 bg-linear-to-r text-white p-6 text-center">
                     <div class="flex justify-center items-center h-full">
                         <p class="font-semibold">Some info</p>
                     </div>

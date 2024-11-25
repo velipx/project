@@ -31,7 +31,7 @@ const overlayClick = (event) => {
       leave-to-class="opacity-0"
     >
       <div
-        class="overlay absolute inset-0 bg-gradient-to-tr opacity-90 dark:from-gray-700 dark:via-s2 dark:to-s1"
+        class="overlay absolute inset-0 bg-linear-to-tr opacity-90 dark:from-gray-700 dark:via-s2 dark:to-s1"
         @click="overlayClick"
       />
     </transition>

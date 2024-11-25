@@ -126,15 +126,15 @@ const pagesToShow = computed(() => generatePageRange(currentPage.value, totalPag
                     id="inputPageField"
                     v-model="inputPage"
                     type="number"
-                    class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600 focus:outline-none placeholder-slate-300 focus:border-blue-500"
+                    class="w-full p-2 bg-gray-700 text-white rounded-xs border border-gray-600 focus:outline-hidden placeholder-slate-300 focus:border-blue-500"
                     :min="1"
                     :max="totalPages"
                     placeholder="Page number"
                 />
                 <div class="mt-4 flex justify-end space-x-2">
-                    <button class="px-4 py-2 bg-gray-700 text-white rounded" @click="closePageInputPopup">Cancel
+                    <button class="px-4 py-2 bg-gray-700 text-white rounded-xs" @click="closePageInputPopup">Cancel
                     </button>
-                    <button class="px-4 py-2 bg-blue-600 text-white rounded" @click="goToPage">Go</button>
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-xs" @click="goToPage">Go</button>
                 </div>
             </div>
         </div>

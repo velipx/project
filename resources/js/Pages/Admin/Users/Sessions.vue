@@ -54,7 +54,7 @@ const logoutAllOtherSessions = () => {
                     <div>
                         <div v-if="sessions.length">
                             <div v-for="(session, index) in sessions" :key="session.id">
-                                <div class="flex items-center justify-between rounded-lg shadow-sm">
+                                <div class="flex items-center justify-between rounded-lg shadow-2xs">
                                     <div class="flex items-center space-x-3">
                                         <BaseIcon class="text-slate-400" w="10" :path="deviceIcon(session.device)" size="42" />
                                         <div>
@@ -92,7 +92,7 @@ const logoutAllOtherSessions = () => {
                 </CardBox>
 
                 <CardBox class="lg:col-span-1" :has-background="false">
-                    <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-6 text-center rounded-xl">
+                    <div class="bg-linear-to-r from-blue-500 to-purple-500 text-white p-6 text-center rounded-xl">
                         <h3 class="text-xl font-bold mb-4">Current session</h3>
                         <div v-if="currentSession">
                             <p><strong>IP Address:</strong> {{ currentSession.ip_address }}</p>

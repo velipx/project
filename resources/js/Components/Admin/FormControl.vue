@@ -69,7 +69,7 @@ const computedValue = computed({
 
 const inputElClass = computed(() => {
     const base = [
-        'px-3 py-2 max-w-full focus:ring dark:text-white focus:outline-none border-gray-700 border-2 dark:border-s3/50 rounded w-full',
+        'px-3 py-2 max-w-full focus:ring-3 dark:text-white focus:outline-hidden border-gray-700 border-2 dark:border-s3/50 rounded-xs w-full',
         'dark:placeholder-gray-400',
         props.size === 'small' ? 'h-10' : props.size === 'large' ? 'h-16' : 'h-12', // Adjust height based on size prop
         props.borderless ? 'border-0' : 'border',

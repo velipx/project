@@ -1,7 +1,5 @@
-@layer components {
-  .style-basic:not(.dark) {
-    .aside {
-    }
+@utility style-basic {
+  &:not(.dark) {
     .aside-scrollbars {
       @apply aside-scrollbars-gray;
     }
@@ -11,8 +9,6 @@
     }
     .aside-menu-item-active {
       @apply text-white;
-    }
-    .navbar-item-label {
     }
     .navbar-item-label-active {
       @apply text-blue-600;

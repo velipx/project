@@ -98,13 +98,13 @@ const componentClass = computed(() => {
     'justify-center',
     'items-center',
     'whitespace-nowrap',
-    'focus:outline-none',
+    'focus:outline-hidden',
     'transition-colors',
-    'focus:ring',
+    'focus:ring-3',
     'duration-150',
     'border',
     (props.disabled || props.processing) ? 'cursor-not-allowed' : 'cursor-pointer',
-    props.roundedFull ? 'rounded-full' : 'rounded',
+    props.roundedFull ? 'rounded-full' : 'rounded-xs',
     getButtonColor(props.color, props.outline, !props.disabled, props.active)
   ]
 

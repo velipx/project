@@ -31,7 +31,7 @@ defineProps({
                     :aria-describedby="undefined"
                     :class="{
                         'im-slideover-wrapper w-full transition duration-300 ease-in-out': true,
-                        'blur-sm': !modalContext.onTopOfStack,
+                        'blur-xs': !modalContext.onTopOfStack,
                         'sm:max-w-sm': config.maxWidth == 'sm',
                         'sm:max-w-md': config.maxWidth == 'md',
                         'sm:max-w-md md:max-w-lg': config.maxWidth == 'lg',

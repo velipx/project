@@ -67,7 +67,7 @@ const handleFriendship = async (friendshipId, action) => {
     <div>
         <Popover class="relative">
             <PopoverButton
-                class="group inline-flex items-center rounded-md bg-s2 px-3 py-2 text-base font-medium hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+                class="group inline-flex items-center rounded-md bg-s2 px-3 py-2 text-base font-medium hover:text-white focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75"
                 @click="handleBellClick">
                 <BaseIcon :path="mdiBell" size="24" class="text-white relative">
                     <span v-if="notificationCount > 0"
@@ -89,7 +89,7 @@ const handleFriendship = async (friendshipId, action) => {
                         class="overflow-hidden rounded-b-lg shadow-lg ring-1 ring-black/5 dark:border-2 dark:border-s2">
                         <div class="relative grid gap-8 bg-white dark:bg-s1 p-2 lg:grid-cols-1">
                             <div v-if="isLoading" class="text-black dark:text-white">
-                                <div role="status" class="max-w-md p-2 space-y-4 divide-y divide-gray-200 rounded animate-pulse dark:divide-gray-700/20 dark:border-gray-700">
+                                <div role="status" class="max-w-md p-2 space-y-4 divide-y divide-gray-200 rounded-xs animate-pulse dark:divide-gray-700/20 dark:border-gray-700">
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
@@ -138,7 +138,7 @@ const handleFriendship = async (friendshipId, action) => {
                             </div>
                         </div>
                         <div class="bg-gray-50 dark:bg-s2 p-2">
-                            <a href="#" class="flow-root rounded-md px-2 py-2 text-center transition duration-150 ease-in-out hover:bg-gray-100 dark:hover:bg-s1/50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50">
+                            <a href="#" class="flow-root rounded-md px-2 py-2 text-center transition duration-150 ease-in-out hover:bg-gray-100 dark:hover:bg-s1/50 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50">
                                 <span class="flex items-center justify-center">
                                     <span class="text-sm font-medium text-gray-900 dark:text-slate-400 dark:hover:text-slate-200">View all notifications</span>
                                 </span>

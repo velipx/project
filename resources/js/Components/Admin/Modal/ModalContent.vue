@@ -32,7 +32,7 @@ defineProps({
                     :aria-describedby="undefined"
                     :class="{
                         'im-modal-wrapper w-full transition duration-300 ease-in-out min-h-screen absolute top-0 sm:relative sm:min-h-full': true,
-                        'blur-sm': !modalContext.onTopOfStack,
+                        'blur-xs': !modalContext.onTopOfStack,
                         'sm:max-w-sm': config.maxWidth == 'sm',
                         'sm:max-w-md': config.maxWidth == 'md',
                         'sm:max-w-md md:max-w-lg': config.maxWidth == 'lg',

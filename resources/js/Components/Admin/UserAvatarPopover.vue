@@ -143,7 +143,7 @@ const avatarUrl = computed(() => props.avatar ? props.avatar : `https://api.dice
         />
         <Popover v-if="isPopoverOpen" class="fixed z-10 min-w-[230px] transition-transform duration-300 popover-content" :style="popoverStyle">
             <div class="items-center p-4 bg-slate-800 text-white rounded-lg shadow-md relative border-2 border-slate-700 max-h-[228px]">
-                <div class="flex-shrink-0">
+                <div class="shrink-0">
                     <img
                         :src="avatarUrl"
                         :alt="username"
@@ -152,11 +152,11 @@ const avatarUrl = computed(() => props.avatar ? props.avatar : `https://api.dice
                 </div>
                 <div class="mt-2 text-center">
                     <div v-if="showSkeleton || !userData?.name" class="animate-pulse">
-                        <div class="h-4 bg-gray-600 rounded mb-2 w-20 mx-auto"></div>
-                        <div class="h-4 bg-gray-600 rounded mb-2 w-48 mx-auto"></div>
-                        <div class="h-4 bg-gray-600 rounded mb-2 w-32 mx-auto"></div>
-                        <div class="h-4 bg-gray-600 rounded mb-2 w-24 mx-auto"></div>
-                        <div class="h-5 bg-gray-600 rounded mb-2 w-20 mx-auto"></div>
+                        <div class="h-4 bg-gray-600 rounded-xs mb-2 w-20 mx-auto"></div>
+                        <div class="h-4 bg-gray-600 rounded-xs mb-2 w-48 mx-auto"></div>
+                        <div class="h-4 bg-gray-600 rounded-xs mb-2 w-32 mx-auto"></div>
+                        <div class="h-4 bg-gray-600 rounded-xs mb-2 w-24 mx-auto"></div>
+                        <div class="h-5 bg-gray-600 rounded-xs mb-2 w-20 mx-auto"></div>
                     </div>
                     <div v-else>
                         <h4 class="font-semibold">{{ userData?.name || 'N/A' }}</h4>

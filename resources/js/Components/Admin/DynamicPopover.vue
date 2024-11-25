@@ -2,8 +2,8 @@
     <div @mouseenter="showPopover" @mouseleave="hidePopover" ref="avatarRef" class="relative inline-block">
         <slot></slot> <!-- Dinamički sadržaj se ubacuje ovde -->
         <Popover v-if="isPopoverOpen" class="fixed z-10 transition-transform duration-300 popover-content" :style="popoverStyle">
-            <div class="flex items-center p-4 bg-gray-800 text-white rounded shadow-md relative">
-                <div class="flex-shrink-0">
+            <div class="flex items-center p-4 bg-gray-800 text-white rounded-xs shadow-md relative">
+                <div class="shrink-0">
                     <img v-if="avatar" :src="avatar" :alt="username" class="rounded-full w-12 h-12" />
                     <div v-else class="flex items-center justify-center w-12 h-12 rounded-full bg-gray-600 text-white font-bold">
                         {{ username.charAt(0).toUpperCase() }}
@@ -11,7 +11,7 @@
                 </div>
                 <div class="ml-3">
                     <div v-if="showSkeleton || !dataLoaded" class="animate-pulse">
-                        <div v-for="n in skeletonCount" :key="n" class="h-4 bg-gray-600 rounded mb-2" :style="{ width: `${skeletonWidth}px` }"></div>
+                        <div v-for="n in skeletonCount" :key="n" class="h-4 bg-gray-600 rounded-xs mb-2" :style="{ width: `${skeletonWidth}px` }"></div>
                     </div>
                     <div v-else>
                         <slot name="content" :userData="userData"></slot> <!-- Dinamički sadržaj za popover -->

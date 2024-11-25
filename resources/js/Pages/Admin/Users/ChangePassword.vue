@@ -132,7 +132,7 @@ const changePassword = async () => {
                             </div>
                             <div v-else>
                                 <div v-for="(update, index) in passwordUpdates" :key="update.id">
-                                    <div class="flex items-center justify-between rounded-lg shadow-sm">
+                                    <div class="flex items-center justify-between rounded-lg shadow-2xs">
                                         <div class="flex items-center space-x-3">
                                             <BaseIcon class="text-slate-400" w="10" :path="deviceIcon(update.device)" size="42" />
                                             <div>
